@@ -1,1 +1,1 @@
-test commit with github directory imported as project
+github directory imported as project
