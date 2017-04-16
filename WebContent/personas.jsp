@@ -8,7 +8,7 @@
 <title>ABM Manager</title>
 </head>
 <body>
-	<s:form action="save">
+	<s:form action="savePersona">
 		<s:hidden name="id"></s:hidden>
 		<s:textfield label="Nombre" name="name"></s:textfield>
 		<s:textfield label="Edad" name="age"></s:textfield>
@@ -18,10 +18,11 @@
 	</s:form>
 		<table>
 		<tr>
-			<th>ID</th>
-			<th>NOMBRE</th>
-			<th>EDAD</th>
-			<th>GENERO</th>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Edad</th>
+			<th>Género</th>
+			<th></th>
 		</tr>
 	<s:iterator value="personas" var="p">
 		<tr>
@@ -29,9 +30,26 @@
 			<td><s:property value="#p.name"/></td>
 			<td><s:property value="#p.age"/></td>
 			<td><s:property value="#p.gender"/></td>
+			<td>
+			<s:url id="modifyURL" action="editPersona">
+					<s:param name="id" value="#p.id"></s:param>
+			</s:url>
+			<s:a href="%{modifyURL}">
+					<img src="edit.jpg" alt="Modificar Usuario" width="20" height="20">
+			</s:a>
+			</td>
+			<td>
+				<s:url id="deleteURL" action="deletePersona">
+					<s:param name="id" value="#p.id"></s:param>
+				</s:url>
+				<s:a href="%{deleteURL}">
+					<img src="delete.png" alt="Borrar Usuario" width="20" height="20">
+				</s:a>
+
+			</td>
 		</tr>
 	</s:iterator>
 	</table>
-	
+		
 </body>
 </html>

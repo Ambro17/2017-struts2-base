@@ -27,18 +27,39 @@ public class PersonaAction extends ActionSupport {
 			addActionError("Ocurrió un error con la edad");
 			return ERROR;
 		}
-		if ( ! existe(id,personas)){
+		if ( ! existe(id, personas)){
 			personas.add(new Persona(name, edad, gender));
+			// TODO revisar metodo existe, problema con ID
 		}
 		else {
 			Persona pers = buscarPersona(id, personas);
 			modificarPersona(pers);
 		}
+		// para tomar los valores nuevos del formulario.
 		resetForm();
+		
 		return SUCCESS;
 	}
+	
+	public String modify(){
+		// recibo el id desde el action, personas.jsp>struts.xml>paction.java
+		personas = PersistentManager.getInstance();
+		Persona persona = buscarPersona(id,personas);
+		id = persona.getId();
+		name = persona.getName();
+		age = String.valueOf(persona.getAge());
+		gender = persona.getGender();
+		
+		return SUCCESS;
+	}
+	public String delete(){
+		List<Persona> personas = PersistentManager.getInstance();
+		personas.removeIf(persona-> persona.getId() == id);
+		return SUCCESS;
+	}
+
 	private boolean existe(long id, List<Persona> personas){
-		return personas.stream().anyMatch(persona-> persona.getId() == id);
+		return personas.stream().anyMatch(p->p.getId() == id);
 	}
 	private Persona buscarPersona(long id, List<Persona> personas){
 		Persona foundPersona=null;
@@ -50,9 +71,9 @@ public class PersonaAction extends ActionSupport {
 		return foundPersona;
 	}
 	private void modificarPersona(Persona pers){
-		name = pers.getName();
-		age = String.valueOf(pers.getAge());
-		gender = pers.getGender();
+		pers.setName(name);
+		pers.setAge(Integer.parseInt(age));
+		pers.setGender(gender);
 	}
 	private void resetForm(){
 		id = -1;
@@ -60,6 +81,7 @@ public class PersonaAction extends ActionSupport {
 		age="";
 		gender="";
 	}
+	
 	// GETTERS AND SETTERS //
 	public long getId() {
 		return id;
@@ -85,13 +107,10 @@ public class PersonaAction extends ActionSupport {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
 	public List<Persona> getPersonas() {
 		return personas;
 	}
-
 	public void setPersonas(List<Persona> personas) {
 		this.personas = personas;
-	}
-	
+	}	
 }

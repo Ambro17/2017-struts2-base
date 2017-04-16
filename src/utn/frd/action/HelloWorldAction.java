@@ -15,7 +15,7 @@ public class HelloWorldAction extends ActionSupport {
 	/* metodo que se ejecuta en la acción "hello" definida en el struts.xml */
 	public String execute() throws Exception {
 		//creo una instancia del objeto MessageStore
-		messageStore = new MessageStore();
+		messageStore = new MessageStore("Mensaje Base");
 		
 		//devuelvo la constante SUCCESS (esta viene heredada de la clase ActionSupport)
 		//también hay otras constantes como ERROR, INPUT o LOGIN

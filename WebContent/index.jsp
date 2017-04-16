@@ -11,10 +11,8 @@
 	<title>Inicio - ABM</title>
 </head>
 <body>
-	<!-- Aca empieza lo que se va a mostrar en la pagina -->
 	<h1>Say my name</h1>
 	<p>
-		<!-- este es un link al action "hello" que está definido en el struts.xml -->
 		<a href="<s:url action='showForm'/>">Ver Formulario de personas</a>
 	</p>
 </body>
