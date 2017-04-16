@@ -27,14 +27,33 @@ public class PersonaAction extends ActionSupport {
 			addActionError("Ocurrió un error con la edad");
 			return ERROR;
 		}
-		
-		//Si el id existe, modificar. Sino agregar una nueva persona
-		personas.add(new Persona(name, edad, gender));
-
+		//if ( ! existe(id,personas)){
+			personas.add(new Persona(name, edad, gender));
+		//}
+		/*else {
+			Persona pers = buscarPersona(id, personas);
+			modificarPersona(pers);
+		}
+*/
 		return SUCCESS;
 	}
-
-	
+	private boolean existe(long id, List<Persona> personas){
+		return personas.stream().anyMatch(persona-> persona.getId() == id);
+	}
+	private Persona buscarPersona(long id, List<Persona> personas){
+		Persona foundPersona=null;
+		for (Persona ps : personas){
+			if (ps.getId() == id) {
+				foundPersona = ps;
+			}
+		}
+		return foundPersona;
+	}
+	private void modificarPersona(Persona pers){
+		name = pers.getName();
+		age = String.valueOf(pers.getAge());
+		gender = pers.getGender();
+	}
 	
 	// GETTERS AND SETTERS //
 	public long getId() {
@@ -60,6 +79,14 @@ public class PersonaAction extends ActionSupport {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public List<Persona> getPersonas() {
+		return personas;
+	}
+
+	public void setPersonas(List<Persona> personas) {
+		this.personas = personas;
 	}
 	
 }
