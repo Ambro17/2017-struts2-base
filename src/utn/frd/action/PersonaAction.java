@@ -18,21 +18,22 @@ public class PersonaAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	
 	public String save(){
-		List<Persona> personas = PersistentManager.getInstance();
+		personas = PersistentManager.getInstance();
 		int edad = 0;
-
 		try{
 			edad = Integer.parseInt(age);
-		}catch(Exception e){
+		} catch(Exception e){
 			addActionError("Ocurrió un error con la edad");
 			return ERROR;
 		}
-		personas.add(new Persona(name, edad, gender));
 		
+		//Si el id existe, modificar. Sino agregar una nueva persona
+		personas.add(new Persona(name, edad, gender));
+
 		return SUCCESS;
 	}
+
 	
 	
 	// GETTERS AND SETTERS //

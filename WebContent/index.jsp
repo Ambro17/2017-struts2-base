@@ -15,8 +15,7 @@
 	<h1>Say my name</h1>
 	<p>
 		<!-- este es un link al action "hello" que está definido en el struts.xml -->
-		<a href="<s:url action='hello'/>">helloworldaction en frd.action, metodo execute.</a>
-		<a href="<s:url action='formulario'/>">Ver Formulario de personas</a>
+		<a href="<s:url action='showForm'/>">Ver Formulario de personas</a>
 	</p>
 </body>
 </html>
