@@ -1,1 +1,1 @@
-test commit with import from github dekstop-created directory
+test commit with github directory imported as project
